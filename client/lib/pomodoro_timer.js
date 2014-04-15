@@ -19,13 +19,23 @@ PomodoroTimer = function () {
         }
     };
 
+    var getLastTime = function (date) {
+        var endTime = new Date(date);
+        endTime.setTime(endTime.getTime() + 25 * 60000);
+
+        var seconds = moment().diff(endTime, 'seconds');
+        var minutes = ~~(seconds / 60);
+
+        return  + minutes + ':' + Math.abs(seconds % 60);
+    };
+
     var tick = function () {
         var pomodoro = currentPomodoro();
 
         console.log(pomodoro);
 
         var timerType = (pomodoro)?'pomodoro':'break';
-        var currentTime = (pomodoro)?pomodoro.started:'--';
+        var currentTime = (pomodoro)?getLastTime(pomodoro.started):'--';
 
         Session.set('timerType', timerType);
         Session.set('currentTime', currentTime);
