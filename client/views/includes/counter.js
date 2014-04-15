@@ -4,6 +4,8 @@
 
 Template.counter.helpers({
     todayCount: function () {
-        return 3;
+        var today = new Date();
+        today.setHours(0, 0, 0);
+        return Pomodoros.find({started:{$gt: today}}).count();
     }
 });
