@@ -13,7 +13,7 @@ Template.timer.destroyed = function () {
 Template.timer.helpers({
     timerType: function () {
         return Session.get('timerType');
-    }, //or break
+    },
     currentTime: function () {
         return Session.get('currentTime');
     }
